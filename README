@@ -1,0 +1,44 @@
+Test-WWW-Selenium-HTML
+
+INSTALLATION
+
+To install this module, run the following commands:
+
+	perl Makefile.PL
+	make
+	make test
+	make install
+
+SUPPORT AND DOCUMENTATION
+
+After installing, you can find documentation for this module with the
+perldoc command.
+
+    perldoc Test::WWW::Selenium::HTML
+
+You can also look for information at:
+
+    RT, CPAN's request tracker (report bugs here)
+        http://rt.cpan.org/NoAuth/Bugs.html?Dist=Test-WWW-Selenium-HTML
+
+    AnnoCPAN, Annotated CPAN documentation
+        http://annocpan.org/dist/Test-WWW-Selenium-HTML
+
+    CPAN Ratings
+        http://cpanratings.perl.org/d/Test-WWW-Selenium-HTML
+
+    Search CPAN
+        http://search.cpan.org/dist/Test-WWW-Selenium-HTML/
+
+
+LICENSE AND COPYRIGHT
+
+Copyright (C) 2012 APNIC Pty Ltd.
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of either: the GNU General Public License as published
+by the Free Software Foundation; or the Artistic License.
+
+The full text of the license can be found in the LICENSE file included
+with this module.
+
