@@ -1,4 +1,4 @@
-# $Id: 100simple.t,v 4425eaad21c8 2012/06/13 04:02:11 gary $
+# $Id$
 
 use warnings;
 use strict;
@@ -16,7 +16,7 @@ use TestDaemon;
 if (not TestDaemon::selenium_server_exists()) {
     plan skip_all => "Unable to test, could not find Selenium Server.";
 }
-plan tests => 13;
+plan tests => 15;
 
 my $port = TestDaemon::get_port();
 
@@ -52,15 +52,3 @@ if (not $pid) {
 }
 
 1;
-
-__END__
-
-Copyright 2012 APNIC Pty Ltd.
-
-This library is free software; you can redistribute it and/or modify it
-under the terms of either: the GNU General Public License as published
-by the Free Software Foundation; or the Artistic License.
-
-The full text of the license can be found in the LICENSE file included
-with this module.
-

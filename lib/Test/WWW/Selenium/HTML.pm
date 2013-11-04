@@ -101,7 +101,7 @@ use constant STORES =>
         keys %{ARRAY_VALUE_STORES()},
         keys %{BOOL_VALUE_STORES()} };
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 sub new
 {
@@ -398,6 +398,10 @@ sub _handle_accessor
             }
             $tb->ok(0, "$test_case_str ".
                        "(timed out, see line $line_number)");
+            if ($diag) {
+                my $html = "Response HTML source:\n".$sel->get_html_source();
+                $tb->diag($html);
+            }
             return 0;
         }
         return 1;
@@ -462,6 +466,8 @@ sub _run_test
                          $slnm_file, $line_number, 
                          $sel, $tb, $vars, $diag);
 
+    my (undef, $test_file, $test_line_number) = $tb->caller();
+
     if ($command eq 'store') {
         my $script;
         $vars->{$value} = 
@@ -473,6 +479,38 @@ sub _run_test
     if ($command eq 'echo') {
         print $target."\n";
         return 1;
+    }
+    if ($command eq 'waitForCondition') {
+        my ($script, $timeout) = ($target, $value);
+        if (not $timeout) {
+            $timeout = _get_timeout_in_seconds($sel) * 1000;
+        }
+        my $test_str = "waitForCondition($target, $value) ".
+                       "($slnm_file:$line_number; ".
+                       "$test_file:$test_line_number)";
+        my $res = eval { $sel->wait_for_condition($script, $timeout) };
+        my $error = $@;
+        $tb->ok($res, $test_str);
+        if ($error) {
+            $tb->diag($error);
+        }
+        return $res;
+    }
+    if ($command eq 'waitForPageToLoad') {
+        my $timeout = $target;
+        if (not $timeout) {
+            $timeout = _get_timeout_in_seconds($sel) * 1000;
+        }
+        my $test_str = "waitForPageToLoad($target, $value) ".
+                       "($slnm_file:$line_number; ".
+                       "$test_file:$test_line_number)";
+        my $res = eval { $sel->wait_for_page_to_load($timeout) };
+        my $error = $@;
+        $tb->ok($res, $test_str);
+        if ($error) {
+            $tb->diag($error);
+        }
+        return $res;
     }
     if (my ($type) = ($command =~ /(^assert|^verify|^waitFor|^store)/)) {
         return _handle_accessor($type, @accessor_args);
@@ -487,8 +525,6 @@ sub _run_test
     my $pcmd = _perl_case($command);
     my $wait = ($pcmd =~ s/_and_wait$//);
     $pcmd .= '_ok';
-   
-    my (undef, $test_file, $test_line_number) = $tb->caller();
 
     my $res = eval { 
         my (@args) = grep { defined $_ } ($target, $value);
@@ -562,7 +598,10 @@ sub run
     my @testdata = _xml_to_testdata($doc->getDocumentElement());
     
     my $sel = $self->{'selenium'};
-    $sel->open('/');
+    if (not $self->{'opened'}) {
+        $self->{'opened'} = 1;
+        $sel->open('/');
+    }
 
     for my $test (@testdata) {
         my $res = _run_test($sel, $self->{'test_builder'}, 
@@ -606,7 +645,7 @@ Test::WWW::Selenium::HTML - Run Selenium HTML tests directly
 
 =head1 VERSION
 
-0.01
+0.02
 
 =head1 SYNOPSIS
 

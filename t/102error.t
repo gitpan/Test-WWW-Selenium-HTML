@@ -1,4 +1,4 @@
-# $Id: 102error.t,v 11c56a66a315 2012/04/04 00:37:31 tomh $
+# $Id$
 
 use warnings;
 use strict;
@@ -72,15 +72,3 @@ EOF
 }
 
 1;
-
-__END__
-
-Copyright 2012 APNIC Pty Ltd.
-
-This library is free software; you can redistribute it and/or modify it
-under the terms of either: the GNU General Public License as published
-by the Free Software Foundation; or the Artistic License.
-
-The full text of the license can be found in the LICENSE file included
-with this module.
-

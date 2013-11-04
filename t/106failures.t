@@ -1,4 +1,4 @@
-# $Id: 106failures.t,v 2aef9f46b0fd 2012/06/06 03:27:58 tomh $
+# $Id$
 
 use warnings;
 use strict;
@@ -46,12 +46,12 @@ if (not $pid) {
     my $err_fh = $asc->{'test_builder'}->failure_output();
     $asc->{'test_builder'}->output(\$mydata);
     $asc->{'test_builder'}->failure_output(\$myerr);
-    eval { $asc->run(path => "./t/htmltests/failures1.html"); };
-    eval { $asc->run(path => "./t/htmltests/failures2.html"); };
-    eval { $asc->run(path => "./t/htmltests/failures3.html"); };
-    eval { $asc->run(path => "./t/htmltests/failures4.html"); };
-    eval { $asc->run(path => "./t/htmltests/failures5.html"); };
-    eval { $asc->run(path => "./t/htmltests/failures6.html"); };
+    eval { $asc->run(path => "./t/htmltests/failures1.html"); 
+           $asc->run(path => "./t/htmltests/failures2.html"); 
+           $asc->run(path => "./t/htmltests/failures3.html"); 
+           $asc->run(path => "./t/htmltests/failures4.html"); 
+           $asc->run(path => "./t/htmltests/failures5.html"); 
+           $asc->run(path => "./t/htmltests/failures6.html"); };
     my $error = $@;
     if ($error) {
         diag $error;
@@ -109,15 +109,3 @@ if (not $pid) {
 }
 
 1;
-
-__END__
-
-Copyright 2012 APNIC Pty Ltd.
-
-This library is free software; you can redistribute it and/or modify it
-under the terms of either: the GNU General Public License as published
-by the Free Software Foundation; or the Artistic License.
-
-The full text of the license can be found in the LICENSE file included
-with this module.
-

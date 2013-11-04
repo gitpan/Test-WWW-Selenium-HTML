@@ -9,6 +9,11 @@ WriteMakefile(
     VERSION_FROM   => 'lib/Test/WWW/Selenium/HTML.pm',
     ABSTRACT_FROM  => 'lib/Test/WWW/Selenium/HTML.pm',
     LICENSE        => 'perl',
+    META_MERGE => {
+        resources => {
+            repository => 'https://github.com/APNIC-net/p5-Test-WWW-Selenium-HTML'
+        }
+    },
     PL_FILES       => {},
     PREREQ_PM      => {
         'Params::Validate'              => '0',

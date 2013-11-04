@@ -1,9 +1,8 @@
-Makefile.PL
 Changes
-README
+lib/Test/WWW/Selenium/HTML.pm
+Makefile.PL
 MANIFEST
 LICENSE
-lib/Test/WWW/Selenium/HTML.pm
 t/001basic.t
 t/002pod.t
 t/003pod-coverage.t
@@ -33,4 +32,5 @@ t/htmltests/simple.html
 t/htmltests/timeouts1.html
 t/htmltests/timeouts2.html
 t/lib/TestDaemon.pm
-META.yml                                 Module meta-data (added by MakeMaker)
+META.yml                                 Module YAML meta-data (added by MakeMaker)
+META.json                                Module JSON meta-data (added by MakeMaker)
